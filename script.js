@@ -1,0 +1,52 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const inputs = document.querySelectorAll(".input");
+    const operatorSelect = document.querySelector(".dropdown");
+    const calculateButton = document.querySelector("button");
+    const resultOld = document.querySelector(".result-old");
+    const resultNew = document.querySelector(".result-new");
+
+    function calculate() {
+        const num1 = parseFloat(inputs[0].value);
+        const num2 = parseFloat(inputs[1].value);
+        const operator = operatorSelect.value;
+
+        if (isNaN(num1) || isNaN(num2)) {
+            resultNew.textContent = "Ошибка: введите числа!";
+            return;
+        }
+
+        let result;
+        switch (operator) {
+            case "+":
+                result = num1 + num2;
+                break;
+            case "-":
+                result = num1 - num2;
+                break;
+            case "*":
+                result = num1 * num2;
+                break;
+            case "/":
+                if (num2 === 0) {
+                    resultNew.textContent = "Ошибка: деление на ноль";
+                    return;
+                }
+                result = num1 / num2;
+                break;
+            case "%":
+                result = num1 % num2;
+                break;
+            case "^":
+                result = Math.pow(num1, num2);
+                break;
+            default:
+                resultNew.textContent = "Ошибка: неизвестная операция";
+                return;
+        }
+
+        resultOld.textContent = resultNew.textContent;
+        resultNew.textContent = `${num1} ${operator} ${num2} = ${result}`;
+    }
+
+    calculateButton.addEventListener("click", calculate);
+});
