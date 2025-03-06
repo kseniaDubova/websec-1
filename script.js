@@ -27,13 +27,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 result = num1 * num2;
                 break;
             case "/":
-                if (num2 === 0) {
+                if (Math.abs(num2)<Number.EPSILON) {
                     resultNew.textContent = "Ошибка: деление на ноль";
                     return;
                 }
                 result = num1 / num2;
                 break;
             case "%":
+                if (Math.abs(num2)<Number.EPSILON) {
+                    resultNew.textContent = "Ошибка: деление на ноль";
+                    return;
+                }
                 result = num1 % num2;
                 break;
             case "^":
